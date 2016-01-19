@@ -11,6 +11,8 @@ AWESOMENESS = [
     'awesome', 'terrific', 'fantastic', 'neato', 'fantabulous', 'wowza', 'oh-so-not-meh',
     'brilliant', 'ducky', 'coolio', 'incredible', 'wonderful', 'smashing', 'lovely']
 
+INSULTNESS = [
+    'YOU STINK!',"YOUR FATHER SMELLED OF ELDERBERRIES!","YOUR MOTHER WAS A HAMSTER!"]
 
 @app.route('/')
 def start_here():
@@ -25,6 +27,7 @@ def start_here():
       <body>
         <h1>Hi! This is the home page.</h1>
         <p><a href=http://localhost:5000/hello>Click for a greeting!</a></p>
+        <p><a href=http://localhost:5000/diss>Click for an insult, ya dummy!</a></p>
       </body> 
     </html>
     """
@@ -80,6 +83,22 @@ def greet_person():
     </html>
     """ % (player,nice_word, compliment)
 
+@app.route('/diss')
+def diss_person():
+  """Give person a diss"""
+
+  insult = choice(INSULTNESS)
+  return """
+  <!doctype html>
+  <html>
+    <head>
+      <title>INSULT</title>
+    </head>
+    <body>
+      %s
+    </body>
+  </html>
+  """ % (insult)
 
 if __name__ == '__main__':
     # debug=True gives us error messages in the browser and also "reloads"
